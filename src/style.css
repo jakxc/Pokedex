@@ -1,0 +1,9 @@
+/* Card */
+.card:hover {
+    cursor: pointer;
+}
+  
+.card-name {
+    text-transform: capitalize;
+    font-weight: bold;
+}
