@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import axios from "axios";
 import Card from "../components/Card";
 
@@ -45,12 +45,15 @@ const Home = () => {
     
     const cardElements = pokeData.length > 0 && pokeData.map(pokemon => {
       return  ( 
-                <Link to="/pokemonDetail">
-                  <Card
-                    key={pokemon.id}
-                    pokemon={pokemon}
-                  /> 
-                </Link>
+                <>
+                  <Link to={`/pokemonInfo/${pokemon.id}`}>
+                    <Card
+                      key={pokemon.id}
+                      pokemon={pokemon}
+                    /> 
+                  </Link>
+                  {/* <Outlet context={{pokemonInfo: pokemon}} /> */}
+                </>
               )
     })
 
