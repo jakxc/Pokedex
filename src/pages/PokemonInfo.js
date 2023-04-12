@@ -4,7 +4,10 @@ import axios from "axios";
 
 const PokemonInfo = () => {
     const { pokemonId } = useParams();
-    const [pokemon, setPokemon] = useState([]);
+    // const { pokemon } = useOutletContext();
+    const [pokemon, setPokemon] = useState({});
+    const [pokemonSpecies, setPokemonSpecies] = useState({});
+    const [flavorText, setFlavorText] = useState('');
     const [loading, setLoading] = useState(false);
 
     const statsContent = [
@@ -23,8 +26,24 @@ const PokemonInfo = () => {
         setLoading(false)
     }
 
+    const getPokemonSpecies = async () => {
+        setLoading(true);
+        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
+        const fileterdFlavorTextEntries = res.data.flavor_text_entries.filter(
+            (element) => element.language.name === "en"
+        );
+        const flavorTextEntry =
+            fileterdFlavorTextEntries.length > 0
+              ? fileterdFlavorTextEntries[0]
+              : {};
+        setFlavorText(flavorTextEntry.flavor_text)
+        setPokemonSpecies(res.data);
+        setLoading(false)
+    }
+
     useEffect(() => {
         getPokemonInfo()
+        getPokemonSpecies()
     }, [pokemonId])
 
     if (loading) {
@@ -52,6 +71,15 @@ const PokemonInfo = () => {
                 })}
           </div>
           <div>Weight: {pokemon.weight} | Height: {pokemon.height}</div>
+          <div className="abilities">
+            Moves: 
+            {pokemon.abilities?.map((item) => {
+              return <div>{item.ability?.name}</div>;
+            })}
+          </div>
+          <div className="description">
+            {flavorText}
+          </div>
         </>
     )
 }
