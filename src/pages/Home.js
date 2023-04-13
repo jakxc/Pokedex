@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react";
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import axios from "axios";
+import Search from "../components/Search";
 import Card from "../components/Card";
 
 const Home = () => {
-    const [pokeData, setPokeData] = useState([]);
+    const [pokemonData, setPokemonData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
     const [nextUrl, setNextUrl] = useState();
     const [prevUrl, setPrevUrl] = useState();
+    const [query, setQuery] = useState('');
+    const [sortBy, setSortBy] = useState('id');
 
     const setAllData = async () => {
-      if (pokeData.length > 0) {
-        setPokeData([]);
+      if (pokemonData.length > 0) {
+        setPokemonData([]);
       }
       setLoading(true);
       const res = await axios.get(url);
@@ -25,7 +28,7 @@ const Home = () => {
     const setCurrentPokemon = async (res) => {
       res.forEach(async (pokemon) => {
         const result = await axios.get(pokemon.url);
-        setPokeData((prevState) => {
+        setPokemonData((prevState) => {
           let newState = [...prevState, result.data];
           newState.sort((a, b) => (a.id > b.id ? 1 : -1));
           return newState;
@@ -37,30 +40,34 @@ const Home = () => {
       setAllData();
     }, [url]);
 
-    if (loading) {
-      return (
-        <pre>Loading...</pre>
-      )
-    }
+    const filteredPokemon = pokemonData.filter(pokemon => {
+      return pokemon.name.toLowerCase().includes(query.toLowerCase()) || pokemon.id === Number(query);
+    }).sort((a, b) => {
+      return a[sortBy] > b[sortBy] ? 1 : -1;
+    })
     
-    const cardElements = pokeData.length > 0 && pokeData.map(pokemon => {
+    const cardElements = filteredPokemon.map(pokemon => {
       return  ( 
                 <>
-                  <NavLink to={`/pokemonInfo/${pokemon.id}`}>
+                  <NavLink to={`/${pokemon.id}`}>
                     <Card
                       key={pokemon.id}
                       pokemon={pokemon}
                     /> 
                   </NavLink>    
-                  {/* <Outlet context={{ pokemon }} /> */}
                 </>
-                
               )
     })
 
     return (
         <div>  
-          {cardElements}        
+          <Search 
+            query={query}
+            onQueryChange={(myQuery) => setQuery(myQuery)}
+            sortBy={sortBy}
+            onSortByChange={(mySort) => setSortBy(mySort)}
+          />
+          {loading ? <pre>Loading, please wait...</pre> : cardElements}        
         </div>
     )
 }

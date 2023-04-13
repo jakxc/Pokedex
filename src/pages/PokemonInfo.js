@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Link, useOutletContext, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from "axios";
 
 const PokemonInfo = () => {
     const { pokemonId } = useParams();
-    // const { pokemon } = useOutletContext();
     const [pokemon, setPokemon] = useState({});
     const [pokemonSpecies, setPokemonSpecies] = useState({});
     const [flavorText, setFlavorText] = useState('');
@@ -29,12 +28,12 @@ const PokemonInfo = () => {
     const getPokemonSpecies = async () => {
         setLoading(true);
         const res = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
-        const fileterdFlavorTextEntries = res.data.flavor_text_entries.filter(
+        const filteredFlavorTextEntries = res.data.flavor_text_entries.filter(
             (element) => element.language.name === "en"
         );
         const flavorTextEntry =
-            fileterdFlavorTextEntries.length > 0
-              ? fileterdFlavorTextEntries[0]
+            filteredFlavorTextEntries.length > 0
+              ? filteredFlavorTextEntries[0]
               : {};
         setFlavorText(flavorTextEntry.flavor_text)
         setPokemonSpecies(res.data);
@@ -47,11 +46,15 @@ const PokemonInfo = () => {
     }, [pokemonId])
 
     if (loading) {
-        return (<pre>Loading...</pre>)
+        return (<pre>Loading, please wait...</pre>)
     }
     
     return (
         <>
+             <Link
+                to=".."
+                className="back-button"
+            >&larr;</Link>
             <h1>{pokemon.name} {pokemon.id}</h1>
             <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
@@ -59,7 +62,7 @@ const PokemonInfo = () => {
                 width={200}
                 alt={`${pokemon.name}`}
             />
-            <div className="types">
+            <section className="types">
                 {pokemon.types?.map((item) => {
                     return (
                         <>
@@ -69,7 +72,7 @@ const PokemonInfo = () => {
                         </>
                     );
                 })}
-          </div>
+          </section>
           <div>Weight: {pokemon.weight} | Height: {pokemon.height}</div>
           <div className="abilities">
             Moves: 
