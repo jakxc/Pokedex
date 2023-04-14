@@ -60,7 +60,7 @@ const Home = () => {
     })
 
     return (
-        <>  
+        <div className="home-container">  
           <Search 
             query={query}
             onQueryChange={(myQuery) => setQuery(myQuery)}
@@ -70,7 +70,7 @@ const Home = () => {
           <div className="cards-container">
             {loading ? <pre>Loading, please wait...</pre> : cardElements}  
           </div>      
-        </>
+        </div>
     )
 }
 
