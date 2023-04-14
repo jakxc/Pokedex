@@ -6,7 +6,7 @@ import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="app">
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/:pokemonId' element={<PokemonInfo />} />

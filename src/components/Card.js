@@ -1,14 +1,12 @@
 const Card = ({ pokemon }) => {
   return (
-    <div className="card" key={pokemon.id}>
-      <span className="card-name">#{pokemon.id}</span>
+    <div className="card">
+      <div className="card-id"><span>#{pokemon.id.toString().padStart(3, '0')}</span></div>
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-          height={108}
-          width={104}
           alt={`${pokemon.name}`}
         />
-      <span className="card-name">{pokemon.name}</span>
+      <div className="card-name"><span>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</span></div>
     </div>
   )     
 };

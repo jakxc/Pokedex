@@ -49,7 +49,7 @@ const Home = () => {
     const cardElements = filteredPokemon.map(pokemon => {
       return  ( 
                 <>
-                  <NavLink to={`/${pokemon.id}`}>
+                  <NavLink to={`/${pokemon.id}`} style={{ textDecoration: 'none' }}>
                     <Card
                       key={pokemon.id}
                       pokemon={pokemon}
@@ -60,15 +60,17 @@ const Home = () => {
     })
 
     return (
-        <div>  
+        <>  
           <Search 
             query={query}
             onQueryChange={(myQuery) => setQuery(myQuery)}
             sortBy={sortBy}
             onSortByChange={(mySort) => setSortBy(mySort)}
           />
-          {loading ? <pre>Loading, please wait...</pre> : cardElements}        
-        </div>
+          <div className="cards-container">
+            {loading ? <pre>Loading, please wait...</pre> : cardElements}  
+          </div>      
+        </>
     )
 }
 
