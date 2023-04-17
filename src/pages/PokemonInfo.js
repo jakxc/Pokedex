@@ -83,6 +83,15 @@ const PokemonInfo = () => {
           <div className="description">
             {flavorText}
           </div>
+          <div className="base-stat">
+            {statsContent &&
+              statsContent.map((stat, index) => (
+                <div className="row" key={stat.field}>
+                  <strong>{stat.title}</strong>
+                  <span>{pokemon.stats ? pokemon.stats[index].base_stat.toString().padStart(3, '0') : 1}</span>
+                </div>
+              ))}
+          </div>
         </>
     )
 }
