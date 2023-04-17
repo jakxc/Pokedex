@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink } from 'react-router-dom';
 import axios from "axios";
+import Header from "../components/Header"
 import Search from "../components/Search";
 import Card from "../components/Card";
 
@@ -61,6 +62,7 @@ const Home = () => {
 
     return (
         <div className="home-container">  
+          <Header />
           <Search 
             query={query}
             onQueryChange={(myQuery) => setQuery(myQuery)}
