@@ -50,7 +50,11 @@ const Home = () => {
     const cardElements = filteredPokemon.map(pokemon => {
       return  ( 
                 <>
-                  <NavLink to={`/${pokemon.id}`} style={{ textDecoration: 'none' }}>
+                  <NavLink 
+                    to={`/${pokemon.id}`} 
+                    style={{ textDecoration: 'none' }}
+                    state={{ pokemon: pokemon }}
+                  >
                     <Card
                       key={pokemon.id}
                       pokemon={pokemon}

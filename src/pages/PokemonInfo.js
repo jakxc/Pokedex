@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from "axios";
 import PokeHeader from '../components/PokeHeader';
 
 const PokemonInfo = () => {
     const { pokemonId } = useParams();
-    const [pokemon, setPokemon] = useState({});
+    const location = useLocation();
+    const { state } = location;
+    const { pokemon } = state;
     const [pokemonSpecies, setPokemonSpecies] = useState({});
     const [flavorText, setFlavorText] = useState('');
     const [loading, setLoading] = useState(false);
@@ -18,13 +20,6 @@ const PokemonInfo = () => {
         { title: "SDEF", field: "specialDefense" },
         { title: "SPD", field: "speed" },
       ];
-
-    const getPokemonInfo = async () => {
-        setLoading(true);
-        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-        setPokemon(res.data);
-        setLoading(false)
-    }
 
     const getPokemonSpecies = async () => {
         setLoading(true);
@@ -42,7 +37,6 @@ const PokemonInfo = () => {
     }
 
     useEffect(() => {
-        getPokemonInfo()
         getPokemonSpecies()
     }, [pokemonId])
 
@@ -64,35 +58,38 @@ const PokemonInfo = () => {
                 className='pokemon-image'
                 alt={`${pokemon.name}`}
             />
-            <section className="types">
-                {pokemon.types?.map((item) => {
-                    return (
-                        <>
-                        <div className="type">
-                            <span>{item.type.name}</span>
-                        </div>
-                        </>
-                    );
-                })}
-          </section>
-          <div>Weight: {pokemon.weight} | Height: {pokemon.height}</div>
-          <div className="abilities">
-            Moves: 
-            {pokemon.abilities?.map((item) => {
-              return <div>{item.ability?.name}</div>;
-            })}
-          </div>
-          <div className="description">
-            {flavorText}
-          </div>
-          <div className="base-stat">
-            {statsContent &&
-              statsContent.map((stat, index) => (
-                <div className="row" key={stat.field}>
-                  <strong>{stat.title}</strong>
-                  <span>{pokemon.stats ? pokemon.stats[index].base_stat.toString().padStart(3, '0') : 1}</span>
-                </div>
-              ))}
+            <div className='content-container'>
+              <section className="types">
+                  {pokemon.types?.map((item) => {
+                      return (
+                          <>
+                          <div className="type-container">
+                              <span>{item.type.name.charAt(0).toUpperCase() 
+                                      + item.type.name.slice(1)}</span>
+                          </div>
+                          </>
+                      );
+                  })}
+            </section>
+            <div>Weight: {pokemon.weight} | Height: {pokemon.height}</div>
+            <div className="abilities">
+              Moves: 
+              {pokemon.abilities?.map((item) => {
+                return <div>{item.ability?.name}</div>;
+              })}
+            </div>
+            <div className="description">
+              {flavorText}
+            </div>
+            <div className="base-stat">
+              {statsContent &&
+                statsContent.map((stat, index) => (
+                  <div className="row" key={stat.field}>
+                    <strong>{stat.title}</strong>
+                    <span>{pokemon.stats ? pokemon.stats[index].base_stat.toString().padStart(3, '0') : 1}</span>
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
     )
