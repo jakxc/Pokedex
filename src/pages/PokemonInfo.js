@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from "axios";
+import PokeHeader from '../components/PokeHeader';
 
 const PokemonInfo = () => {
     const { pokemonId } = useParams();
@@ -11,11 +12,11 @@ const PokemonInfo = () => {
 
     const statsContent = [
         { title: "HP", field: "hp" },
-        { title: "Attack", field: "attack" },
-        { title: "Defense", field: "defense" },
-        { title: "Special Attack", field: "specialAttack" },
-        { title: "Special Defense", field: "specialDefense" },
-        { title: "Speed", field: "speed" },
+        { title: "ATK", field: "attack" },
+        { title: "DEF", field: "defense" },
+        { title: "SATK", field: "specialAttack" },
+        { title: "SDEF", field: "specialDefense" },
+        { title: "SPD", field: "speed" },
       ];
 
     const getPokemonInfo = async () => {
@@ -45,21 +46,22 @@ const PokemonInfo = () => {
         getPokemonSpecies()
     }, [pokemonId])
 
+    const styles = {
+      backgroundColor: "#74CB48"
+    }
+
     if (loading) {
         return (<pre>Loading, please wait...</pre>)
     }
     
     return (
-        <>
-             <Link
-                to=".."
-                className="back-button"
-            >&larr;</Link>
-            <h1>{pokemon.name} {pokemon.id}</h1>
+        <div className='pokeinfo-container' style={styles}>
+            <PokeHeader pokemon={ pokemon }/>
             <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
                 height={200}
                 width={200}
+                className='pokemon-image'
                 alt={`${pokemon.name}`}
             />
             <section className="types">
@@ -92,7 +94,7 @@ const PokemonInfo = () => {
                 </div>
               ))}
           </div>
-        </>
+        </div>
     )
 }
 
