@@ -336,7 +336,8 @@ input, input:focus {
     padding: 56px 20px 20px;
     gap: 16px;
 
-    height: 64%;
+    width: 100%;
+    height: 100%;
     max-height: 412px;
 
     /* Grayscale/White */
@@ -379,6 +380,99 @@ input, input:focus {
     font-size: 10px;
     line-height: 16px;
     color: #FFFFFF;
+}
+
+/**About**/
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.attribute-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
+    max-width: 312px;
+    max-height: 48px;
+}
+
+.attribute {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px 25px;
+    gap: 4px;
+
+    max-height: 48px;
+}
+
+.attribute-key {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 12px;
+
+    /* Grayscale/Medium */
+    color: #666666;
+}
+
+.attribute-value-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0px;
+    gap: 8px;
+
+    max-height: 32px;
+}
+
+.attribute-value-container img {
+    width: 16px;
+    height: 16px;
+}
+
+.attribute-value {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 16px;
+
+    /* Grayscale/Dark */
+    color: #1D1D1D;
+}
+
+.attribute-divider {
+    width: 1px;
+    height: 100%;
+
+    /* Grayscale/Light */
+    background: #E0E0E0;
+}
+
+.description {
+    max-width: 312px;
+    width: 100%;
+    height: 60px;
+    padding: 20px;
+
+    /* Body/Body 3 */
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 16px;
+
+    /* or 160% */
+    display: flex;
+    align-items: center;
+    text-align: justify;
+
+    /* Grayscale/Dark */
+    color: #1D1D1D;
 }
 
   

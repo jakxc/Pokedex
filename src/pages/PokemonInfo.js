@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from "axios";
 import PokeHeader from '../components/PokeHeader';
+import About from '../components/About';
 
 const PokemonInfo = () => {
     const { pokemonId } = useParams();
@@ -50,7 +51,7 @@ const PokemonInfo = () => {
     
     return (
         <div className='pokeinfo-container' style={styles}>
-            <PokeHeader pokemon={ pokemon }/>
+            <PokeHeader pokemon={pokemon}/>
             <img
                 src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
                 height={200}
@@ -71,17 +72,8 @@ const PokemonInfo = () => {
                       );
                   })}
             </section>
-            <div>Weight: {pokemon.weight} | Height: {pokemon.height}</div>
-            <div className="abilities">
-              Moves: 
-              {pokemon.abilities?.map((item) => {
-                return <div>{item.ability?.name}</div>;
-              })}
-            </div>
-            <div className="description">
-              {flavorText}
-            </div>
-            <div className="base-stat">
+            <About pokemon={pokemon} flavorText={flavorText}/>
+            {/* <div className="base-stat">
               {statsContent &&
                 statsContent.map((stat, index) => (
                   <div className="row" key={stat.field}>
@@ -89,7 +81,7 @@ const PokemonInfo = () => {
                     <span>{pokemon.stats ? pokemon.stats[index].base_stat.toString().padStart(3, '0') : 1}</span>
                   </div>
                 ))}
-            </div>
+            </div> */}
           </div>
         </div>
     )
