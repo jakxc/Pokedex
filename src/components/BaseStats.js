@@ -3,7 +3,7 @@ import ProgressBar from "./ProgressBar"
 const StatComponent = ({statName, statValue}) => {
     return (
         <div className="stat">
-            <h4>{statName}</h4>
+            <span className="stat-name"><h4>{statName}</h4></span>
             <div className='content-divider'></div>
             <span className="stat-value">{statValue.toString().padStart(3, '0')}</span>
             <ProgressBar 
@@ -28,8 +28,7 @@ const BaseStats = ({ pokemon }) => {
     const statElements = statsContent.map((stat, i) => {
         return <StatComponent 
                 statName={stat.title}
-                statValue={pokemon.stats[i].base_stat}
-                />
+                statValue={pokemon.stats ? pokemon.stats[i].base_stat : 1}/>
     })
 
     return (

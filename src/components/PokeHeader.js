@@ -5,7 +5,6 @@ import backIcon from '../assets/images/arrow_back.svg'
 const PokeHeader = ({ pokemon }) => {
     return (
         <div className='pokeinfo-header'>
-            <img></img>
             <Link to="..">
                 <img
                     src={backIcon}
