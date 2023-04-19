@@ -1,19 +1,23 @@
 @font-face {
     font-family: Poppins;
     src: url('./assets//fonts/Poppins-Regular.ttf');
-    weight: 400
+    weight: 400;
+    font-style: normal;
 }
 
 @font-face {
     font-family: Poppins;
     src: url('./assets//fonts/Poppins-Bold.ttf');
-    weight: 700
+    weight: 700;
+    font-style: normal;
 }
 
 * {
     box-sizing: border-box;
-    font-family: Poppins, serif;
-    
+}
+
+body {
+    font-family: Poppins, serif; ;
 }
 
 h1 {
@@ -28,6 +32,11 @@ h2 {
 
 h3 {
     font-size: 0.75em;
+    line-height: 16px;
+}
+
+h4 {
+    font-size: 0.625em;
     line-height: 16px;
 }
 
@@ -387,6 +396,7 @@ input, input:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     gap: 16px;
 }
 
@@ -403,11 +413,12 @@ input, input:focus {
 .attribute {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 0px 25px;
+    padding: 0px 20px;
     gap: 4px;
 
-    max-height: 48px;
+    min-height: 48px;
 }
 
 .attribute-key {
@@ -446,7 +457,7 @@ input, input:focus {
     color: #1D1D1D;
 }
 
-.attribute-divider {
+.content-divider {
     width: 1px;
     height: 100%;
 
@@ -457,11 +468,9 @@ input, input:focus {
 .description {
     max-width: 312px;
     width: 100%;
-    height: 60px;
-    padding: 20px;
+    min-height: 60px;
 
     /* Body/Body 3 */
-    font-style: normal;
     font-weight: 400;
     font-size: 10px;
     line-height: 16px;
@@ -471,6 +480,44 @@ input, input:focus {
     align-items: center;
     text-align: justify;
 
+    /* Grayscale/Dark */
+    color: #1D1D1D;
+}
+
+.base-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.stat {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 8px 0;
+    gap: 8px;
+}
+
+.stats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.stat-value {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 16px;
+    
+    /* identical to box height, or 160% */
+    display: flex;
+    align-items: center;
+    
     /* Grayscale/Dark */
     color: #1D1D1D;
 }

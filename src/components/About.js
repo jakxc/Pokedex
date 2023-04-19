@@ -11,7 +11,7 @@ const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
                 <img
                     src={attributeImg}
                     alt='Attribute Icon'
-                    style={attributeImg===rulerIcon ? styles : null}
+                    style={attributeImg === rulerIcon ? styles : null}
                 />
                 <span className='attribute-value'>{attributeValue}</span>
             </div>
@@ -22,8 +22,9 @@ const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
 }
 
 const About = ({ pokemon, flavorText }) => {
-    const moveElements = pokemon.abilities?.map((item) => {
-        return <div className='attribute-value'>{item.ability?.name}</div>;
+    const moveElements = pokemon.abilities?.slice(0, 2).map((item, i) => {
+        return <div className='attribute-value'>{item.ability?.name.charAt(0).toUpperCase() 
+                                                + item.ability?.name.slice(1)}</div>;
     })
 
     return (
@@ -35,13 +36,13 @@ const About = ({ pokemon, flavorText }) => {
                     attributeValue={`${pokemon.weight} kg`}
                     attributeKey='Weight'
                 />
-                <div className='attribute-divider'></div>
+                <div className='content-divider'></div>
                  <Attribute 
                     attributeImg={rulerIcon}
                     attributeValue={`${pokemon.height} m`}
                     attributeKey='Height'
                 />
-                <div className='attribute-divider'></div>
+                <div className='content-divider'></div>
                  <div className='attribute'>
                     {moveElements}
                     <span className='attribute-key'>Moves</span>

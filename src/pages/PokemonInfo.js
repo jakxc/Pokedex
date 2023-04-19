@@ -3,24 +3,15 @@ import { useParams, useLocation } from 'react-router-dom';
 import axios from "axios";
 import PokeHeader from '../components/PokeHeader';
 import About from '../components/About';
+import BaseStats from '../components/BaseStats';
 
 const PokemonInfo = () => {
     const { pokemonId } = useParams();
-    const location = useLocation();
-    const { state } = location;
+    const { state } = useLocation();;
     const { pokemon } = state;
     const [pokemonSpecies, setPokemonSpecies] = useState({});
     const [flavorText, setFlavorText] = useState('');
     const [loading, setLoading] = useState(false);
-
-    const statsContent = [
-        { title: "HP", field: "hp" },
-        { title: "ATK", field: "attack" },
-        { title: "DEF", field: "defense" },
-        { title: "SATK", field: "specialAttack" },
-        { title: "SDEF", field: "specialDefense" },
-        { title: "SPD", field: "speed" },
-      ];
 
     const getPokemonSpecies = async () => {
         setLoading(true);
@@ -53,7 +44,7 @@ const PokemonInfo = () => {
         <div className='pokeinfo-container' style={styles}>
             <PokeHeader pokemon={pokemon}/>
             <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
                 height={200}
                 width={200}
                 className='pokemon-image'
@@ -71,18 +62,10 @@ const PokemonInfo = () => {
                           </>
                       );
                   })}
-            </section>
-            <About pokemon={pokemon} flavorText={flavorText}/>
-            {/* <div className="base-stat">
-              {statsContent &&
-                statsContent.map((stat, index) => (
-                  <div className="row" key={stat.field}>
-                    <strong>{stat.title}</strong>
-                    <span>{pokemon.stats ? pokemon.stats[index].base_stat.toString().padStart(3, '0') : 1}</span>
-                  </div>
-                ))}
-            </div> */}
-          </div>
+              </section>
+              <About pokemon={pokemon} flavorText={flavorText}/>
+              <BaseStats pokemon={pokemon}/>
+            </div>
         </div>
     )
 }
