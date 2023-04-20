@@ -5,15 +5,17 @@ import PokeHeader from '../components/PokeHeader';
 import About from '../components/About';
 import BaseStats from '../components/BaseStats';
 import pokemonTypeColors from '../pokemonTypeColors';
+import chevron from '../assets/images/chevron_right.svg'
 
 const PokemonInfo = () => {
     const { pokemonId } = useParams();
     const { state } = useLocation();;
     const { pokemon } = state;
+    const [currentPokemon, setCurrentPokemon] = useState(pokemon);
     const [pokemonSpecies, setPokemonSpecies] = useState({});
     const [flavorText, setFlavorText] = useState('');
     const [loading, setLoading] = useState(false);
-    const [pokemonColor, setPokemonColor] = useState('')
+    const [pokemonColor, setPokemonColor] = useState('');
 
     const getPokemonSpecies = async () => {
         setLoading(true);
@@ -30,19 +32,33 @@ const PokemonInfo = () => {
         setLoading(false)
     }
 
+    const getPrevPokemon = async () => {
+        setLoading(true);
+        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${currentPokemon.id - 1}`);
+        setCurrentPokemon(res.data);
+        setLoading(false)
+    }
+
+    const getNextPokemon = async () => {
+        setLoading(true);
+        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${currentPokemon.id + 1}`);
+        setCurrentPokemon(res.data);
+        setLoading(false)
+    }
+
     useEffect(() => {
         getPokemonSpecies()
     }, [pokemonId])
 
     useEffect(() => {
-        if (pokemon.types[0]?.type?.name) {
+        if (currentPokemon.types[0]?.type?.name) {
           const [{ color }] = pokemonTypeColors.filter(
-            (item) => item.name === pokemon.types[0]?.type?.name
+            (item) => item.name === currentPokemon.types[0]?.type?.name
           );
 
           setPokemonColor(color);
         }
-      }, [pokemon.types]);
+      }, [currentPokemon.types]);
 
     const styles = {
       backgroundColor: pokemonColor
@@ -54,17 +70,38 @@ const PokemonInfo = () => {
     
     return (
         <div className='pokeinfo-container' style={styles}>
-            <PokeHeader pokemon={pokemon}/>
+            <PokeHeader pokemon={currentPokemon}/>
+            <div className='nav-container'>
+                <img
+                    src={chevron}
+                    width={24}
+                    height={24}
+                    style={{ transform: 'rotate(180deg)', 
+                             visibility: currentPokemon.id > 1? "" : "hidden",
+                             cursor: "pointer"
+                            }}
+                    alt='Left Chevron'
+                    onClick={getPrevPokemon}
+                />
+                 <img
+                    src={chevron}
+                    width={24}
+                    height={24}
+                    style={{ cursor: "pointer" }}
+                    alt='Right Chevron'
+                    onClick={getNextPokemon}
+                />
+            </div>
             <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`}
+                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${currentPokemon.id}.png`}
                 height={200}
                 width={200}
                 className='pokemon-image'
-                alt={`${pokemon.name}`}
+                alt={`${currentPokemon.name}`}
             />
             <div className='content-container'>
                 <section className="types">
-                    {pokemon.types?.map((item) => {
+                    {currentPokemon.types?.map((item) => {
                         const [{ color }] = pokemonTypeColors.filter((el) => el.name === item.type.name);
                     
                         return (
@@ -75,8 +112,8 @@ const PokemonInfo = () => {
                         );
                     })}
               </section>
-              <About pokemon={pokemon} flavorText={flavorText} pokemonColor={pokemonColor}/>
-              <BaseStats pokemon={pokemon} pokemonColor={pokemonColor}/>
+              <About pokemon={currentPokemon} flavorText={flavorText} pokemonColor={pokemonColor}/>
+              <BaseStats pokemon={currentPokemon} pokemonColor={pokemonColor}/>
             </div>
         </div>
     )
