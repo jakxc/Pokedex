@@ -4,6 +4,7 @@ import axios from "axios";
 import PokeHeader from '../components/PokeHeader';
 import About from '../components/About';
 import BaseStats from '../components/BaseStats';
+import pokemonTypeColors from '../pokemonTypeColors';
 
 const PokemonInfo = () => {
     const { pokemonId } = useParams();
@@ -12,6 +13,7 @@ const PokemonInfo = () => {
     const [pokemonSpecies, setPokemonSpecies] = useState({});
     const [flavorText, setFlavorText] = useState('');
     const [loading, setLoading] = useState(false);
+    const [pokemonColor, setPokemonColor] = useState('')
 
     const getPokemonSpecies = async () => {
         setLoading(true);
@@ -32,8 +34,18 @@ const PokemonInfo = () => {
         getPokemonSpecies()
     }, [pokemonId])
 
+    useEffect(() => {
+        if (pokemon.types[0]?.type?.name) {
+          const [{ color }] = pokemonTypeColors.filter(
+            (item) => item.name === pokemon.types[0]?.type?.name
+          );
+
+          setPokemonColor(color);
+        }
+      }, [pokemon.types]);
+
     const styles = {
-      backgroundColor: "#74CB48"
+      backgroundColor: pokemonColor
     }
 
     if (loading) {
@@ -51,20 +63,20 @@ const PokemonInfo = () => {
                 alt={`${pokemon.name}`}
             />
             <div className='content-container'>
-              <section className="types">
-                  {pokemon.types?.map((item) => {
-                      return (
-                          <>
-                          <div className="type-container">
-                              <span>{item.type.name.charAt(0).toUpperCase() 
-                                      + item.type.name.slice(1)}</span>
-                          </div>
-                          </>
-                      );
-                  })}
+                <section className="types">
+                    {pokemon.types?.map((item) => {
+                        const [{ color }] = pokemonTypeColors.filter((el) => el.name === item.type.name);
+                    
+                        return (
+                            <div className="type-container" style={{ backgroundColor: `${color}` }}>
+                                <span>{item.type.name.charAt(0).toUpperCase() 
+                                        + item.type.name.slice(1)}</span>
+                            </div>
+                        );
+                    })}
               </section>
-              <About pokemon={pokemon} flavorText={flavorText}/>
-              <BaseStats pokemon={pokemon}/>
+              <About pokemon={pokemon} flavorText={flavorText} pokemonColor={pokemonColor}/>
+              <BaseStats pokemon={pokemon} pokemonColor={pokemonColor}/>
             </div>
         </div>
     )

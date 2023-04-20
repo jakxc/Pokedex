@@ -21,7 +21,7 @@ const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
 
 }
 
-const About = ({ pokemon, flavorText }) => {
+const About = ({ pokemon, flavorText, pokemonColor}) => {
     const moveElements = pokemon.abilities?.slice(0, 2).map((item, i) => {
         return <div className='attribute-value'>{item.ability?.name.charAt(0).toUpperCase() 
                                                 + item.ability?.name.slice(1)}</div>;
@@ -29,7 +29,7 @@ const About = ({ pokemon, flavorText }) => {
 
     return (
         <section className='about'>
-            <h2>About</h2>
+            <h2 style={{ color: `${pokemonColor}` }}>About</h2>
             <div className='attribute-container'>
                 <Attribute 
                     attributeImg={weightIcon}
