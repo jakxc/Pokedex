@@ -23,8 +23,10 @@ const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
 
 const About = ({ pokemon, flavorText, pokemonColor}) => {
     const moveElements = pokemon.abilities?.slice(0, 2).map((item, i) => {
-        return <div className='attribute-value'>{item.ability?.name.charAt(0).toUpperCase() 
-                                                + item.ability?.name.slice(1)}</div>;
+        return <div className='attribute-value' key={i}>
+                {item.ability?.name.charAt(0).toUpperCase() 
+                    + item.ability?.name.slice(1)}
+                </div>;
     })
 
     return (

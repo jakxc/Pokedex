@@ -36,14 +36,14 @@ const PokemonInfo = () => {
         setLoading(true);
         const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${currentPokemon.id - 1}`);
         setCurrentPokemon(res.data);
-        setLoading(false)
+        setLoading(false);
     }
 
     const getNextPokemon = async () => {
         setLoading(true);
         const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${currentPokemon.id + 1}`);
         setCurrentPokemon(res.data);
-        setLoading(false)
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -76,7 +76,8 @@ const PokemonInfo = () => {
                     src={chevron}
                     width={24}
                     height={24}
-                    style={{ transform: 'rotate(180deg)', 
+                    style={{
+                             transform: 'rotate(180deg)', 
                              visibility: currentPokemon.id > 1? "" : "hidden",
                              cursor: "pointer"
                             }}

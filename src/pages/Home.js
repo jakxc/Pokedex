@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink } from 'react-router-dom';
 import axios from "axios";
 import Header from "../components/Header"
@@ -7,17 +7,18 @@ import Card from "../components/Card";
 
 const Home = () => {
     const [pokemonData, setPokemonData] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
     const [nextUrl, setNextUrl] = useState();
     const [prevUrl, setPrevUrl] = useState();
     const [query, setQuery] = useState('');
     const [sortBy, setSortBy] = useState('id');
+    const [loading, setLoading] = useState(false);
+    const pokemonListRef = useRef();
 
     const setAllData = async () => {
-      if (pokemonData.length > 0) {
-        setPokemonData([]);
-      }
+      // if (pokemonData.length > 0) {
+      //   setPokemonData([]);
+      // }
       setLoading(true);
       const res = await axios.get(url);
       setNextUrl(res.data.next);
@@ -26,11 +27,11 @@ const Home = () => {
       setLoading(false);
     };
 
-    const setCurrentPokemon = async (res) => {
-      res.forEach(async (pokemon) => {
-        const result = await axios.get(pokemon.url);
+    const setCurrentPokemon = async (results) => {
+      results.forEach(async (pokemon) => {
+        const res = await axios.get(pokemon.url);
         setPokemonData((prevState) => {
-          let newState = [...prevState, result.data];
+          let newState = [...prevState, res.data];
           newState.sort((a, b) => (a.id > b.id ? 1 : -1));
           return newState;
         });
@@ -40,6 +41,15 @@ const Home = () => {
     useEffect(() => {
       setAllData();
     }, [url]);
+
+    const onScroll = () => {
+      if (pokemonListRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = pokemonListRef.current;
+        if (scrollTop + clientHeight === scrollHeight) {
+          setUrl(nextUrl);
+        }
+      }
+    };
 
     const filteredPokemon = pokemonData.filter(pokemon => {
       return pokemon.name.toLowerCase().includes(query.toLowerCase()) || pokemon.id === Number(query);
@@ -73,7 +83,11 @@ const Home = () => {
             sortBy={sortBy}
             onSortByChange={(mySort) => setSortBy(mySort)}
           />
-          <div className="cards-container">
+          <div 
+            onScroll={onScroll}
+            ref={pokemonListRef}
+            className="cards-container"
+          >
             {loading ? <pre>Loading, please wait...</pre> : cardElements}  
           </div>      
         </div>
