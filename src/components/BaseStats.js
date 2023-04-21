@@ -27,6 +27,7 @@ const BaseStats = ({ pokemon, pokemonColor }) => {
 
     const statElements = statsContent.map((stat, i) => {
         return <StatComponent 
+                    key={i}
                     statName={stat.title}
                     statValue={pokemon.stats ? pokemon.stats[i].base_stat : 1}
                     pokemonColor={pokemonColor}

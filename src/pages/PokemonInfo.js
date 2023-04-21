@@ -19,7 +19,7 @@ const PokemonInfo = () => {
 
     const getPokemonSpecies = async () => {
         setLoading(true);
-        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`);
+        const res = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${currentPokemon.id}`);
         const filteredFlavorTextEntries = res.data.flavor_text_entries.filter(
             (element) => element.language.name === "en"
         );
@@ -48,7 +48,7 @@ const PokemonInfo = () => {
 
     useEffect(() => {
         getPokemonSpecies()
-    }, [pokemonId])
+    }, [currentPokemon])
 
     useEffect(() => {
         if (currentPokemon.types[0]?.type?.name) {
@@ -60,16 +60,12 @@ const PokemonInfo = () => {
         }
       }, [currentPokemon.types]);
 
-    const styles = {
-      backgroundColor: pokemonColor
-    }
-
     if (loading) {
         return (<pre>Loading, please wait...</pre>)
     }
     
     return (
-        <div className='pokeinfo-container' style={styles}>
+        <div className='pokeinfo-container' style={{ backgroundColor: pokemonColor }}>
             <PokeHeader pokemon={currentPokemon}/>
             <div className='nav-container'>
                 <img
@@ -102,19 +98,30 @@ const PokemonInfo = () => {
             />
             <div className='content-container'>
                 <section className="types">
-                    {currentPokemon.types?.map((item) => {
+                    {currentPokemon.types?.map((item, i) => {
                         const [{ color }] = pokemonTypeColors.filter((el) => el.name === item.type.name);
                     
                         return (
-                            <div className="type-container" style={{ backgroundColor: `${color}` }}>
+                            <div 
+                                key={i}
+                                className="type-container" 
+                                style={{ backgroundColor: `${color}` }}
+                            >
                                 <span>{item.type.name.charAt(0).toUpperCase() 
                                         + item.type.name.slice(1)}</span>
                             </div>
                         );
                     })}
-              </section>
-              <About pokemon={currentPokemon} flavorText={flavorText} pokemonColor={pokemonColor}/>
-              <BaseStats pokemon={currentPokemon} pokemonColor={pokemonColor}/>
+                </section>
+                <About 
+                    pokemon={currentPokemon}
+                    flavorText={flavorText} 
+                    pokemonColor={pokemonColor}
+                />
+                <BaseStats
+                    pokemon={currentPokemon}
+                    pokemonColor={pokemonColor}
+                />
             </div>
         </div>
     )

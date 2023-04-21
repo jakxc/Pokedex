@@ -16,9 +16,10 @@ const Home = () => {
     const pokemonListRef = useRef();
 
     const setAllData = async () => {
-      // if (pokemonData.length > 0) {
-      //   setPokemonData([]);
-      // }
+      if (pokemonData.length > 0) {
+        setPokemonData([]);
+      }
+
       setLoading(true);
       const res = await axios.get(url);
       setNextUrl(res.data.next);
@@ -42,7 +43,7 @@ const Home = () => {
       setAllData();
     }, [url]);
 
-    const onScroll = () => {
+    const handleScroll = () => {
       if (pokemonListRef.current) {
         const { scrollTop, scrollHeight, clientHeight } = pokemonListRef.current;
         if (scrollTop + clientHeight === scrollHeight) {
@@ -59,21 +60,23 @@ const Home = () => {
     
     const cardElements = filteredPokemon.map(pokemon => {
       return  ( 
-                <>
-                  <NavLink 
-                    to={`/${pokemon.id}`} 
-                    style={{ textDecoration: 'none' }}
-                    state={{ pokemon: pokemon }}
-                  >
-                    <Card
-                      key={pokemon.id}
-                      pokemon={pokemon}
-                    /> 
-                  </NavLink>    
-                </>
+                <NavLink 
+                  key={pokemon.id}
+                  to={`/${pokemon.id}`} 
+                  style={{ textDecoration: 'none' }}
+                  state={{ pokemon: pokemon }}
+                >
+                  <Card
+                    pokemon={pokemon}
+                  /> 
+                </NavLink>    
               )
     })
 
+    if (loading) {
+      return (<pre>Loading, please wait...</pre>)
+    }
+  
     return (
         <div className="home-container">  
           <Header />
@@ -84,11 +87,11 @@ const Home = () => {
             onSortByChange={(mySort) => setSortBy(mySort)}
           />
           <div 
-            onScroll={onScroll}
+            onScroll={handleScroll}
             ref={pokemonListRef}
             className="cards-container"
           >
-            {loading ? <pre>Loading, please wait...</pre> : cardElements}  
+            {cardElements.length > 0 ? cardElements : <pre>No matching results, please try again.</pre>}  
           </div>      
         </div>
     )
