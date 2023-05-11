@@ -1,4 +1,5 @@
-import pokeball from '../assets/images/pokeball.svg'
+import "./index.css";
+import pokeball from '../../assets/images/pokeball.svg'
 
 const Header = () => {
     return (

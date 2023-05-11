@@ -1,9 +1,10 @@
+import "./index.css"
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from 'react-router-dom';
 import axios from "axios";
-import Header from "../components/Header"
-import Search from "../components/Search";
-import Card from "../components/Card";
+import Header from "../../components/Header";
+import Search from "../../components/Search";
+import Card from "../../components/Card";
 
 const Home = () => {
     const [pokemonData, setPokemonData] = useState([]);

@@ -1,0 +1,34 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 4px;
+    gap: 8px;
+    background-color: #DC0A2D;
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    height: 100%;
+    margin-top: 16px;
+    padding: 24px 12px;
+    gap: 8px;
+
+    /* Grayscale/White */
+    background: #FFFFFF;
+
+    /* Inner Shadow/2 dp */
+    box-shadow: inset 0px 1px 3px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.cards-container::-webkit-scrollbar {
+    display: none;
+}

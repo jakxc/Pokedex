@@ -1,14 +1,14 @@
+import './index.css'
 import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from "axios";
-import PokeHeader from '../components/PokeHeader';
-import About from '../components/About';
-import BaseStats from '../components/BaseStats';
-import pokemonTypeColors from '../pokemonTypeColors';
-import chevron from '../assets/images/chevron_right.svg'
+import PokeHeader from '../../components/PokeHeader';
+import About from '../../components/About';
+import BaseStats from '../../components/BaseStats';
+import pokemonTypeColors from '../../pokemonTypeColors';
+import chevron from '../../assets/images/chevron_right.svg'
 
 const PokemonInfo = () => {
-    const { pokemonId } = useParams();
     const { state } = useLocation();;
     const { pokemon } = state;
     const [currentPokemon, setCurrentPokemon] = useState(pokemon);

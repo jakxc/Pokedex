@@ -1,4 +1,5 @@
-import ProgressBar from "./ProgressBar"
+import './index.css'
+import ProgressBar from './ProgressBar'
 
 const StatComponent = ({statName, statValue, pokemonColor}) => {
     return (

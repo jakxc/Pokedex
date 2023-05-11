@@ -1,5 +1,6 @@
-import weightIcon from '../assets/images/weight.svg'
-import rulerIcon from '../assets/images/ruler.svg'
+import './index.css'
+import weightIcon from '../../assets/images/weight.svg'
+import rulerIcon from '../../assets/images/ruler.svg'
 
 const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
     const styles = {
@@ -18,7 +19,6 @@ const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
             <span className='attribute-key'>{attributeKey}</span>
         </div>
     )
-
 }
 
 const About = ({ pokemon, flavorText, pokemonColor}) => {

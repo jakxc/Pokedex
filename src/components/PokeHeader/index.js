@@ -1,6 +1,7 @@
+import "./index.css"
 import { Link } from 'react-router-dom';
-import pokeball from '../assets/images/pokeball.svg'
-import backIcon from '../assets/images/arrow_back.svg'
+import pokeball from '../../assets/images/pokeball.svg'
+import backIcon from '../../assets/images/arrow_back.svg'
 
 const PokeHeader = ({ pokemon }) => {
     return (

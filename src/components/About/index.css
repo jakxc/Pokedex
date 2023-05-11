@@ -1,0 +1,84 @@
+/**About**/
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+}
+
+.attribute-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+
+    max-width: 312px;
+    max-height: 48px;
+}
+
+.attribute {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    gap: 4px;
+
+    min-height: 48px;
+}
+
+.attribute-key {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 12px;
+
+    /* Grayscale/Medium */
+    color: #666666;
+}
+
+.attribute-value-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 0px;
+    gap: 8px;
+
+    max-height: 32px;
+}
+
+.attribute-value-container img {
+    width: 16px;
+    height: 16px;
+}
+
+.attribute-value {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 16px;
+
+    /* Grayscale/Dark */
+    color: #1D1D1D;
+}
+
+.description {
+    width: 100%;
+    max-width: 312px;
+    min-height: 60px;
+
+    /* Body/Body 3 */
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 16px;
+
+    /* or 160% */
+    display: flex;
+    align-items: center;
+    text-align: justify;
+
+    /* Grayscale/Dark */
+    color: #1D1D1D;
+}

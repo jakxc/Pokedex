@@ -1,9 +1,10 @@
+import './index.css'
 import { useState } from "react"
-import searchIcon from "../assets/images/search.svg"
-import closeIcon from "../assets/images/close.svg"
-import sortIcon from "../assets/images/sort.svg"
-import nameIcon from "../assets/images/name.svg"
-import numberIcon from "../assets/images/number.svg"
+import searchIcon from "../../assets/images/search.svg"
+import closeIcon from "../../assets/images/close.svg"
+import sortIcon from "../../assets/images/sort.svg"
+import nameIcon from "../../assets/images/name.svg"
+import numberIcon from "../../assets/images/number.svg"
 
 
 const DropDown = ({sortBy, onSortByChange, toggle, onToggleChange, onIconChange}) => {
