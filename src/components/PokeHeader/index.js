@@ -17,7 +17,7 @@ const PokeHeader = ({ pokemon }) => {
             <h3>#{pokemon.id.toString().padStart(3, '0')}</h3>
             <img
                     src={pokeball}
-                    alt="Pokeball Image"
+                    alt="Pokeball"
                     className='pokeball-image'
             />
         </div>

@@ -25,11 +25,11 @@ const Home = () => {
       const res = await axios.get(url);
       setNextUrl(res.data.next);
       setPrevUrl(res.data.previous);
-      setCurrentPokemon(res.data.results);
+      setCurrentPage(res.data.results);
       setLoading(false);
     };
 
-    const setCurrentPokemon = async (results) => {
+    const setCurrentPage = async (results) => {
       results.forEach(async (pokemon) => {
         const res = await axios.get(pokemon.url);
         setPokemonData((prevState) => {
@@ -49,6 +49,10 @@ const Home = () => {
         const { scrollTop, scrollHeight, clientHeight } = pokemonListRef.current;
         if (scrollTop + clientHeight === scrollHeight) {
           setUrl(nextUrl);
+        }
+
+        if (scrollHeight < 0) {
+          setUrl(prevUrl);
         }
       }
     };
@@ -73,10 +77,6 @@ const Home = () => {
                 </NavLink>    
               )
     })
-
-    if (loading) {
-      return (<pre>Loading, please wait...</pre>)
-    }
   
     return (
         <div className="home-container">  
@@ -87,13 +87,17 @@ const Home = () => {
             sortBy={sortBy}
             onSortByChange={(mySort) => setSortBy(mySort)}
           />
+
           <div 
-            onScroll={handleScroll}
-            ref={pokemonListRef}
-            className="cards-container"
-          >
-            {cardElements.length > 0 ? cardElements : <pre>No matching results, please try again.</pre>}  
-          </div>      
+                onScroll={handleScroll}
+                ref={pokemonListRef}
+                className="cards-container"
+              >
+               {loading 
+                  ? <pre>Loading...please wait</pre> 
+                  : cardElements.length > 0 ? cardElements : <pre>No matching results, please try again.</pre> 
+                } 
+          </div> 
         </div>
     )
 }

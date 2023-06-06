@@ -1,6 +1,6 @@
 import './index.css'
 import { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import axios from "axios";
 import PokeHeader from '../../components/PokeHeader';
 import About from '../../components/About';
@@ -60,9 +60,7 @@ const PokemonInfo = () => {
         }
       }, [currentPokemon.types]);
 
-    if (loading) {
-        return (<pre>Loading, please wait...</pre>)
-    }
+    if (loading) return <pre>Loading...please wait</pre>
     
     return (
         <div className='pokeinfo-container' style={{ backgroundColor: pokemonColor }}>
@@ -73,14 +71,14 @@ const PokemonInfo = () => {
                     width={24}
                     height={24}
                     style={{
-                             transform: 'rotate(180deg)', 
-                             visibility: currentPokemon.id > 1? "" : "hidden",
-                             cursor: "pointer"
+                            transform: 'rotate(180deg)', 
+                            visibility: currentPokemon.id > 1? "" : "hidden",
+                            cursor: "pointer"
                             }}
                     alt='Left Chevron'
                     onClick={getPrevPokemon}
                 />
-                 <img
+                <img
                     src={chevron}
                     width={24}
                     height={24}
