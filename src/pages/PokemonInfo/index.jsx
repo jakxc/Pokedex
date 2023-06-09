@@ -33,32 +33,26 @@ const PokemonInfo = () => {
     }
 
     const getPrevPokemon = async () => {
-        setLoading(true);
         const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${currentPokemon.id - 1}`);
         setCurrentPokemon(res.data);
-        setLoading(false);
     }
 
     const getNextPokemon = async () => {
-        setLoading(true);
         const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${currentPokemon.id + 1}`);
         setCurrentPokemon(res.data);
-        setLoading(false);
     }
 
     useEffect(() => {
-        getPokemonSpecies()
+        getPokemonSpecies();
+        if (currentPokemon.types[0]?.type?.name) {
+            const [{ color }] = pokemonTypeColors.filter(
+              (item) => item.name === currentPokemon.types[0]?.type?.name
+            )
+  
+            setPokemonColor(color);
+        }
     }, [currentPokemon])
 
-    useEffect(() => {
-        if (currentPokemon.types[0]?.type?.name) {
-          const [{ color }] = pokemonTypeColors.filter(
-            (item) => item.name === currentPokemon.types[0]?.type?.name
-          );
-
-          setPokemonColor(color);
-        }
-      }, [currentPokemon.types]);
 
     if (loading) return <pre>Loading...please wait</pre>
     

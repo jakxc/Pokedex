@@ -1,6 +1,6 @@
 import "./index.css"
 import { useState, useEffect, useRef } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import axios from "axios";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
@@ -11,10 +11,23 @@ const Home = () => {
     const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
     const [nextUrl, setNextUrl] = useState();
     const [prevUrl, setPrevUrl] = useState();
-    const [query, setQuery] = useState('');
-    const [sortBy, setSortBy] = useState('id');
+    const [searchParams, setSearchParams] = useSearchParams()
     const [loading, setLoading] = useState(false);
     const pokemonListRef = useRef();
+
+    const query =  searchParams.get('query') || '';
+    const sortBy = searchParams.get('sortBy') || '';
+
+    function handleFilterChange(key, value) {
+      setSearchParams(prevParams => {
+          if (value === null) {
+              prevParams.delete(key)
+          } else {
+              prevParams.set(key, value)
+          }
+          return prevParams
+      })
+    }
 
     const setAllData = async () => {
       if (pokemonData.length > 0) {
@@ -83,9 +96,9 @@ const Home = () => {
           <Header />
           <Search 
             query={query}
-            onQueryChange={(myQuery) => setQuery(myQuery)}
+            onQueryChange={(myQuery) => handleFilterChange('query', myQuery)}
             sortBy={sortBy}
-            onSortByChange={(mySort) => setSortBy(mySort)}
+            onSortByChange={(mySort) => handleFilterChange('sortBy', mySort)}
           />
 
           <div 
