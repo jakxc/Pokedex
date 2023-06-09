@@ -10,7 +10,7 @@ import chevron from '../../assets/images/chevron_right.svg'
 
 const PokemonInfo = () => {
     const { state } = useLocation();;
-    const { pokemon } = state;
+    const { pokemon, search } = state;
     const [currentPokemon, setCurrentPokemon] = useState(pokemon);
     const [pokemonSpecies, setPokemonSpecies] = useState({});
     const [flavorText, setFlavorText] = useState('');
@@ -58,7 +58,10 @@ const PokemonInfo = () => {
     
     return (
         <div className='pokeinfo-container' style={{ backgroundColor: pokemonColor }}>
-            <PokeHeader pokemon={currentPokemon}/>
+            <PokeHeader 
+                pokemon={currentPokemon}
+                search={search}
+            />
             <div className='nav-container'>
                 <img
                     src={chevron}

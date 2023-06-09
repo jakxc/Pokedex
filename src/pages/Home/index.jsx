@@ -9,9 +9,9 @@ import Card from "../../components/Card";
 const Home = () => {
     const [pokemonData, setPokemonData] = useState([]);
     const [url, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/");
-    const [nextUrl, setNextUrl] = useState();
-    const [prevUrl, setPrevUrl] = useState();
-    const [searchParams, setSearchParams] = useSearchParams()
+    const [nextUrl, setNextUrl] = useState('');
+    const [prevUrl, setPrevUrl] = useState('');
+    const [searchParams, setSearchParams] = useSearchParams();
     const [loading, setLoading] = useState(false);
     const pokemonListRef = useRef();
 
@@ -20,7 +20,7 @@ const Home = () => {
 
     function handleFilterChange(key, value) {
       setSearchParams(prevParams => {
-          if (value === null) {
+          if (value === null || value.length === 0) {
               prevParams.delete(key)
           } else {
               prevParams.set(key, value)
@@ -82,7 +82,10 @@ const Home = () => {
                   key={pokemon.id}
                   to={`/${pokemon.id}`} 
                   style={{ textDecoration: 'none' }}
-                  state={{ pokemon: pokemon }}
+                  state={{ 
+                    pokemon: pokemon,
+                    search: `?${searchParams.toString()}`,
+                   }}
                 >
                   <Card
                     pokemon={pokemon}

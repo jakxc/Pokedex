@@ -3,10 +3,13 @@ import { Link } from 'react-router-dom';
 import pokeball from '../../assets/images/pokeball.svg'
 import backIcon from '../../assets/images/arrow_back.svg'
 
-const PokeHeader = ({ pokemon }) => {
+const PokeHeader = ({ pokemon, search }) => {
     return (
         <div className='pokeinfo-header'>
-            <Link to="..">
+            <Link 
+                to={`..${search}`}
+                relative="path"
+            >
                 <img
                     src={backIcon}
                     alt="Back Icon"
