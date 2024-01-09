@@ -6,8 +6,9 @@ const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
     const styles = {
         transform: 'rotate(90deg)'
     }
+    
     return (
-        <div className='attribute'>
+        <div className="attribute | d-flex flex-column align-items-center justify-content-center gap-2 p-3">
             <div className='attribute-value-container'>
                 <img
                     src={attributeImg}
@@ -21,18 +22,18 @@ const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
     )
 }
 
-const About = ({ pokemon, flavorText, pokemonColor}) => {
+const About = ({ pokemon, flavorText, pokemonColor }) => {
     const moveElements = pokemon.abilities?.slice(0, 2).map((item, i) => {
-        return <div className='attribute-value' key={i}>
+        return <div className="attribute-value" key={i}>
                 {item.ability?.name.charAt(0).toUpperCase() 
                     + item.ability?.name.slice(1)}
                 </div>;
     })
 
     return (
-        <section className='about'>
+        <section className="w-100 d-flex flex-column justify-content-center align-items-center gap-4">
             <h2 style={{ color: `${pokemonColor}` }}>About</h2>
-            <div className='attribute-container'>
+            <div className='d-flex justify-content-center align-items-center gap-3'>
                 <Attribute 
                     attributeImg={weightIcon}
                     attributeValue={`${pokemon.weight} kg`}
@@ -45,12 +46,12 @@ const About = ({ pokemon, flavorText, pokemonColor}) => {
                     attributeKey='Height'
                 />
                 <div className='content-divider'></div>
-                 <div className='attribute'>
-                    {moveElements}
+                 <div className="attribute | d-flex flex-column align-items-center justify-content-center gap-2 p-3">
+                    <div>{moveElements}</div>
                     <span className='attribute-key'>Moves</span>
                 </div>
             </div>
-            <div className="description">
+            <div className="description | d-flex justify-content-center align-items-center p-3">
               {flavorText}
             </div>
         </section>

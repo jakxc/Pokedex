@@ -1,9 +1,6 @@
+@import "../../App.css";
+
 .home-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding: 4px;
-    gap: 8px;
     background-color: hsl(350, 91%, 45%);
 }
 

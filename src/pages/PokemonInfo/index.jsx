@@ -2,7 +2,7 @@ import './index.css'
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
-import PokeHeader from '../../components/PokeHeader';
+import Hero from '../../components/Hero';
 import About from '../../components/About';
 import BaseStats from '../../components/BaseStats';
 import pokemonTypeColors from '../../pokemonTypeColors';
@@ -58,7 +58,7 @@ const PokemonInfo = () => {
     
     return (
         <div className='pokeinfo-container' style={{ backgroundColor: pokemonColor }}>
-            <PokeHeader 
+            <Hero 
                 pokemon={currentPokemon}
                 search={search}
             />

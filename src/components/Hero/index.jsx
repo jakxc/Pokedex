@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import pokeball from '../../assets/images/pokeball.svg'
 import backIcon from '../../assets/images/arrow_back.svg'
 
-const PokeHeader = ({ pokemon, search }) => {
+const Hero = ({ pokemon, search }) => {
     return (
         <div className='pokeinfo-header'>
             <Link 
@@ -27,4 +27,4 @@ const PokeHeader = ({ pokemon, search }) => {
     )
 }
 
-export default PokeHeader
+export default Hero

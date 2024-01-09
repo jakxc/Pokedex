@@ -95,7 +95,7 @@ const Home = () => {
     })
   
     return (
-        <div className="home-container">  
+        <div className="home-container | h-100 d-flex flex-column gap-2 p-2">  
           <Header />
           <Search 
             query={query}

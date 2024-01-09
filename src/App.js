@@ -11,13 +11,15 @@ import {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />}/> 
-        <Route path="/:id" element={<PokemonInfo />}/>
-        <Route path='*' element={<NotFound/>} />
-      </Routes>
-    </Router>
+    <div className="app">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />}/> 
+          <Route path="/:id" element={<PokemonInfo />}/>
+          <Route path='*' element={<NotFound/>} />
+        </Routes>
+      </Router>
+    </div>
   )
 }
 

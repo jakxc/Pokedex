@@ -3,10 +3,10 @@ import ProgressBar from './ProgressBar'
 
 const StatComponent = ({statName, statValue, pokemonColor}) => {
     return (
-        <div className="stat">
-            <span className="stat-name"><h4>{statName}</h4></span>
+        <div className="stat | w-100 d-flex justify-content-center align-items-center gap-2">
+            <span className="stat__name">{statName}</span>
             <div className='content-divider'></div>
-            <span className="stat-value">{statValue.toString().padStart(3, '0')}</span>
+            <span className="stat__value">{statValue.toString().padStart(3, '0')}</span>
             <ProgressBar 
                 bgColor={pokemonColor.slice(0, -2) + "0.2)"}
                 fillColor={pokemonColor}
@@ -30,15 +30,15 @@ const BaseStats = ({ pokemon, pokemonColor }) => {
         return <StatComponent 
                     key={i}
                     statName={stat.title}
-                    statValue={pokemon.stats ? pokemon.stats[i].base_stat : 1}
+                    statValue={pokemon.stats ? pokemon.stats[i].base_stat : 0}
                     pokemonColor={pokemonColor}
                 />
     })
 
     return (
-        <section className="base-stats">
+        <section className="w-100 d-flex flex-column gap-3">
             <h2 style={{ color: `${pokemonColor}` }}>Base Stats</h2>
-            <div className="stats-container">
+            <div className="d-flex flex-column gap-2">
                 {statElements}
             </div> 
         </section>

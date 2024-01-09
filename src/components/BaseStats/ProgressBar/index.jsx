@@ -1,7 +1,7 @@
 const ProgressBar = ({ bgColor, fillColor, value }) => {
     const backgroundStyles = {
-      height: "4px",
-      width: '100%',
+      height: "8px",
+      width: "100%",
       backgroundColor: bgColor,
       borderRadius: 4,
     }
