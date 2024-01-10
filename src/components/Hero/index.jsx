@@ -5,23 +5,25 @@ import backIcon from '../../assets/images/arrow_back.svg'
 
 const Hero = ({ pokemon, search }) => {
     return (
-        <div className='pokeinfo-header'>
-            <Link 
-                to={`..${search}`}
-                relative="path"
-            >
-                <img
-                    src={backIcon}
-                    alt="Back Icon"
-                    className='back-icon'
-                />
-            </Link>
-            <span><h1>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1></span>
-            <h3>#{pokemon.id.toString().padStart(3, '0')}</h3>
+        <div className="hero | w-100 d-flex px-4 py-3 justify-content-between">
+            <div className="d-flex gap-3">
+                <Link 
+                    to={`..${search}`}
+                    relative="path"
+                >
+                    <img
+                        src={backIcon}
+                        alt="Back Icon"
+                        className='back-icon'
+                    />
+                </Link>
+                <span className="h3">{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</span>
+            </div>
+            <div>#{pokemon.id.toString().padStart(3, '0')}</div>
             <img
                     src={pokeball}
                     alt="Pokeball"
-                    className='pokeball-image'
+                    className='pokeball-icon'
             />
         </div>
     )

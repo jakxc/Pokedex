@@ -15,26 +15,26 @@ const DropDown = ({sortBy, onSortByChange, toggle, onToggleChange, onIconChange}
     }
 
     return (
-        <div className="sort-container">
-            <div className="input-container">
+        <div className="dropdown | d-flex flex-column justify-content-center px-3 py-2 gap-3">
+            <div className="d-flex gap-2 align-items-center">
                 <input 
                     type="radio" 
                     name="id" 
                     value="id" 
                     id="id"
-                    className="radio-button" 
+                    className="radio-btn" 
                     checked={sortBy === "id"}
                     onChange={handleChange}
                 />
                 <label htmlFor="id">Number</label>
             </div>
-            <div className="input-container">
+            <div className="d-flex gap-2 align-items-center">
                 <input 
                     type="radio"
                     name="name" 
                     value="name" 
                     id="name" 
-                    className="radio-button" 
+                    className="radio-btn" 
                     checked={sortBy === "name"}
                     onChange={handleChange}
                 />
@@ -62,7 +62,7 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange}) => {
     }
 
     return (
-        <div className="search-filter-container">
+        <div className="search-filter | d-flex gap-4">
             {toggle && <DropDown
                 sortBy={sortBy}
                 onSortByChange={mySort => onSortByChange(mySort)} 
@@ -70,7 +70,7 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange}) => {
                 onToggleChange={setToggle}
                 onIconChange={setIcon}
             />}
-            <div className="search-container">
+            <div className="search | w-100 d-flex align-items-center gap-2 p-3">
                 <img
                     src={searchIcon}
                     alt="Search Icon"
@@ -78,12 +78,12 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange}) => {
                 <input 
                     type="text" 
                     name="search" 
-                    className="search-input" 
+                    className="search-input | w-100 px-2" 
                     value={query}
                     onChange={handleQueryChange}
                     placeholder="Search"
                 />
-                <div className="close-container">
+                <div className="close-btn | d-flex px-2">
                     {query.length > 0 && <img
                         src={closeIcon}
                         alt="Close Icon"
@@ -91,10 +91,10 @@ const Search = ({query, onQueryChange, sortBy, onSortByChange}) => {
                     />}
                 </div>
             </div>
-            <div className="sort-button" onClick={toggleDropdown}>
+            <div className="sort-btn | d-flex justify-content-center align-items-center p-2" onClick={toggleDropdown}>
                 <img
                     src={icon}
-                    alt="Sort Icon"
+                    alt="Sort"
                 />
             </div>
         </div>

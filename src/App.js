@@ -16,7 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}/> 
           <Route path="/:id" element={<PokemonInfo />}/>
-          <Route path='*' element={<NotFound/>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>

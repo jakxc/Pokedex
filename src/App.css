@@ -1,7 +1,7 @@
 :root {
-  --clr-red: 350, 91%, 45%,
-  --clr-white: 0, 0%, 100%,
-  --clr-black: 0, 0%, 11%,
+  --clr-red: 350, 91%, 45%;
+  --clr-white: 0, 0%, 100%;
+  --clr-black: 0, 0%, 11%;
   --clr-grey: 0, 0%, 40%;
 }
 

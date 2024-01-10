@@ -2,14 +2,13 @@
 
 /**About**/
 .attribute {
-    min-height: 75px;
+    height: 90px;
 }
 
 .attribute-key {
     font-style: normal;
     font-weight: 400;
     font-size: 8px;
-    line-height: 12px;
 
     /* Grayscale/Medium */
     color: hsl(var(--clr-grey));
@@ -22,6 +21,10 @@
 
     /* Grayscale/Dark */
     color: hsl(var(--clr-black));
+}
+
+.attribute-icon {
+    height: 40px;
 }
 
 .description {

@@ -1,18 +1,12 @@
-.header-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 12px;
-    gap: 16px;
+@import "../../App.css";
 
+.header {
     font-weight: 700;
     font-size: 24px;
-    line-height: 32px;
     /* Grayscale/White */
-    color: #FFFFFF;
+    color: hsl(var(--clr-white));
 }
 
-.header-container img {
+.header img {
     width: 24px;
-    height: 24px;
 }

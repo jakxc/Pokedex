@@ -57,16 +57,14 @@ const PokemonInfo = () => {
     if (loading) return <pre>Loading...please wait</pre>
     
     return (
-        <div className='pokeinfo-container' style={{ backgroundColor: pokemonColor }}>
+        <div className="h-100 d-flex flex-column justify-content-between p-2" style={{ backgroundColor: pokemonColor }}>
             <Hero 
                 pokemon={currentPokemon}
                 search={search}
             />
-            <div className='nav-container'>
+            <div className="chevrons | w-100 d-flex justify-content-between px-3 py-4">
                 <img
                     src={chevron}
-                    width={24}
-                    height={24}
                     style={{
                             transform: 'rotate(180deg)', 
                             visibility: currentPokemon.id > 1? "" : "hidden",
@@ -77,8 +75,6 @@ const PokemonInfo = () => {
                 />
                 <img
                     src={chevron}
-                    width={24}
-                    height={24}
                     style={{ cursor: "pointer" }}
                     alt='Right Chevron'
                     onClick={getNextPokemon}
@@ -91,15 +87,15 @@ const PokemonInfo = () => {
                 className='pokemon-image'
                 alt={`${currentPokemon.name}`}
             />
-            <div className='content-container'>
-                <section className="types">
+            <div className="info-container | w-100 d-flex flex-column pt-5 px-3 pb-4">
+                <section className="d-flex justify-content-center align-items-center p-4">
                     {currentPokemon.types?.map((item, i) => {
                         const [{ color }] = pokemonTypeColors.filter((el) => el.name === item.type.name);
                     
                         return (
                             <div 
                                 key={i}
-                                className="type-container" 
+                                className="type-delegate | d-flex justify-content-center align-items-center px-3 py-2" 
                                 style={{ backgroundColor: `${color}` }}
                             >
                                 <span>{item.type.name.charAt(0).toUpperCase() 

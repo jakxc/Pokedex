@@ -1,6 +1,6 @@
 const ProgressBar = ({ bgColor, fillColor, value }) => {
     const backgroundStyles = {
-      height: "8px",
+      height: "10px",
       width: "100%",
       backgroundColor: bgColor,
       borderRadius: 4,
@@ -8,7 +8,7 @@ const ProgressBar = ({ bgColor, fillColor, value }) => {
   
     const progressStyles = {
       height: '100%',
-      width: `${(value / 233) * 100}%`,
+      width: `${(value / 255) * 100}%`,
       backgroundColor: fillColor,
       borderRadius: 'inherit',
     }

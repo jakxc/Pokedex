@@ -95,7 +95,7 @@ const Home = () => {
     })
   
     return (
-        <div className="home-container | h-100 d-flex flex-column gap-2 p-2">  
+        <div className="home | h-100 d-flex flex-column gap-2 p-2">  
           <Header />
           <Search 
             query={query}
@@ -107,7 +107,7 @@ const Home = () => {
           <div 
                 onScroll={handleScroll}
                 ref={pokemonListRef}
-                className="cards-container"
+                className="cards | h-100 d-flex flex-wrap align-content-start gap-3 px-4 py-3"
               >
                {loading 
                   ? <pre>Loading...please wait</pre> 

@@ -8,12 +8,13 @@ const Attribute = ({ attributeImg, attributeValue, attributeKey }) => {
     }
     
     return (
-        <div className="attribute | d-flex flex-column align-items-center justify-content-center gap-2 p-3">
+        <div className="attribute | d-flex flex-column align-items-center justify-content-between p-3">
             <div className='attribute-value-container'>
                 <img
                     src={attributeImg}
-                    alt='Attribute Icon'
+                    alt='Attribute'
                     style={attributeImg === rulerIcon ? styles : null}
+                    className="attribute-icon"
                 />
                 <span className='attribute-value'>{attributeValue}</span>
             </div>
@@ -46,8 +47,8 @@ const About = ({ pokemon, flavorText, pokemonColor }) => {
                     attributeKey='Height'
                 />
                 <div className='content-divider'></div>
-                 <div className="attribute | d-flex flex-column align-items-center justify-content-center gap-2 p-3">
-                    <div>{moveElements}</div>
+                 <div className="attribute | d-flex flex-column align-items-center justify-content-between gap-2 p-3">
+                    <div className="d-flex flex-column justify-content-center align-items-center">{moveElements}</div>
                     <span className='attribute-key'>Moves</span>
                 </div>
             </div>
