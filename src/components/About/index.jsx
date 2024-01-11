@@ -52,7 +52,7 @@ const About = ({ pokemon, flavorText, pokemonColor }) => {
                     <span className='attribute-key'>Moves</span>
                 </div>
             </div>
-            <div className="description | d-flex justify-content-center align-items-center p-3">
+            <div className="description | d-flex justify-content-center align-items-center">
               {flavorText}
             </div>
         </section>

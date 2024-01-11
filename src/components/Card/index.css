@@ -2,8 +2,8 @@
 
 /* Card */
 .card {
-    width: 200px;
-    height: 204px;
+    width: 175px;
+    height: 180px;
     background-color: hsl(var(--clr-white));
     /* Drop Shadow/2 dp */
     box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.2);
@@ -24,25 +24,24 @@
     transition: opacity 0.3s ease-in-out;
   }
 
-.card-id {
+.card__id {
     font-size: 12px;
     color: hsl(0, 0%, 40%);
 }
 
-.card-name {
+.card__name {
     /* Grayscale/Background */
-    min-height: 75px;
+    height: 75px;
     border-radius: 7px;
     background-color: hsl(0, 0%, 94%);
     font-size: 14px;
-    color: hsl(0, 0%, 11%);
+    color: hsl(var(--clr-black));
 }
 
-.card img {
+.card__img {
     width: 102px;
-    height: 102px;
-    left: 50px;
-    top: 50px;
+    left: calc(87.5px - 25%);
+    top: 35px;
     position: absolute;
 }
 

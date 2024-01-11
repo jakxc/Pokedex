@@ -1,0 +1,5 @@
+@import "../../App.css";
+
+.modal {
+    background-color: hsl(var(--clr-grey), 75%);
+}

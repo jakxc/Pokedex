@@ -8,20 +8,16 @@
     width: 32px;
 }
 
+.back-icon:hover {
+    opacity: 75%;
+}
+
 .pokeball-icon {
     position: absolute;
-    width: 208px;
-    height: 208px;
+    height: 500px;
+    max-height: 45%;
     right: 8px;
     top: 8px;
 
     opacity: 0.2;
-}
-
-.pokemon-image {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    left: 45%;
-    top: 80px;
 }

@@ -1,10 +1,9 @@
 /* Pokemon Info */
 .pokemon-image {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    left: 76px;
-    top: 80px;
+    width: 300px;
+    left: calc(50% - 150px);
+    top: 20%
 }
 
 /** Pokemon Types **/
@@ -32,10 +31,16 @@
 .chevrons {
     height: 160px;
     max-height: 25%;
+    z-index: 999;
 }
 
 .chevrons img {
-    width: 40px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.chevrons img:hover {
+    opacity: 75%;
 }
 
   

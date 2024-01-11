@@ -21,3 +21,13 @@
 .cards::-webkit-scrollbar {
     display: none;
 }
+
+.nav-arrow {
+    color: hsl(var(--clr-white));
+    cursor: pointer;
+    font-size: 21px;
+}
+
+.nav-arrow:hover {
+    opacity: 75%;
+}

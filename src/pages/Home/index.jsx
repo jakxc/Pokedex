@@ -5,6 +5,8 @@ import axios from "axios";
 import Header from "../../components/Header";
 import Search from "../../components/Search";
 import Card from "../../components/Card";
+import Modal from "../../components/Modal";
+import loadingGif from "../../assets/gifs/pokeball_gif.gif"
 
 const Home = () => {
     const [pokemonData, setPokemonData] = useState([]);
@@ -12,7 +14,9 @@ const Home = () => {
     const [nextUrl, setNextUrl] = useState('');
     const [prevUrl, setPrevUrl] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
+    
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
     const pokemonListRef = useRef();
 
     const query =  searchParams.get('query') || '';
@@ -35,11 +39,19 @@ const Home = () => {
       }
 
       setLoading(true);
-      const res = await axios.get(url);
-      setNextUrl(res.data.next);
-      setPrevUrl(res.data.previous);
-      setCurrentPage(res.data.results);
-      setLoading(false);
+     
+      try {
+        const res = await axios.get(url);
+        setNextUrl(res.data.next);
+        setPrevUrl(res.data.previous);
+        setCurrentPage(res.data.results);
+        setError(false);
+      } catch (e) {
+        console.log(e);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     };
 
     const setCurrentPage = async (results) => {
@@ -57,18 +69,18 @@ const Home = () => {
       setAllData();
     }, [url]);
 
-    const handleScroll = () => {
-      if (pokemonListRef.current) {
-        const { scrollTop, scrollHeight, clientHeight } = pokemonListRef.current;
-        if (scrollTop + clientHeight === scrollHeight) {
-          setUrl(nextUrl);
-        }
+    // const handleScroll = () => {
+    //   if (pokemonListRef.current) {
+    //     const { scrollTop, scrollHeight, clientHeight } = pokemonListRef.current;
+    //     if (scrollTop + clientHeight === scrollHeight) {
+    //       setUrl(nextUrl);
+    //     }
 
-        if (scrollHeight < 0) {
-          setUrl(prevUrl);
-        }
-      }
-    };
+    //     if (scrollHeight < 0) {
+    //       setUrl(prevUrl);
+    //     }
+    //   }
+    // };
 
     const filteredPokemon = pokemonData.filter(pokemon => {
       return pokemon.name.toLowerCase().includes(query.toLowerCase()) || pokemon.id === Number(query);
@@ -104,16 +116,23 @@ const Home = () => {
             onSortByChange={(mySort) => handleFilterChange('sortBy', mySort)}
           />
 
-          <div 
-                onScroll={handleScroll}
-                ref={pokemonListRef}
-                className="cards | h-100 d-flex flex-wrap align-content-start gap-3 px-4 py-3"
-              >
-               {loading 
-                  ? <pre>Loading...please wait</pre> 
-                  : cardElements.length > 0 ? cardElements : <pre>No matching results, please try again.</pre> 
-                } 
+          <div className="cards | h-100 d-flex flex-wrap align-content-start gap-3 px-4 py-3" >
+            { error && <pre>An unexpected error occured!</pre>}
+            { loading && <Modal content={<img src={loadingGif} alt="Pokeball" style={{ width: "350px" }} />} text="Loading...please wait" />}
+            { cardElements.length > 0 ? cardElements : <pre>No matching results, please try again.</pre> } 
           </div> 
+          <div className="w-100 d-flex justify-content-between sticky-bottom">
+              <div  
+                style={{ visibility: prevUrl ? "" : "hidden" }}
+                onClick={() => setUrl(prevUrl)}
+                className="nav-arrow | p-1"
+              >Previous</div>
+              <div 
+                style={{ visibility: nextUrl ? "" : "hidden" }}
+                onClick={() => setUrl(nextUrl)}
+                className="nav-arrow | p-1"
+              >Next</div>
+            </div>
         </div>
     )
 }

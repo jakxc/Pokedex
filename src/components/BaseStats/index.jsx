@@ -36,7 +36,7 @@ const BaseStats = ({ pokemon, pokemonColor }) => {
     })
 
     return (
-        <section className="w-100 d-flex flex-column gap-3">
+        <section className="w-100 d-flex flex-column gap-3 p-2">
             <h2 style={{ color: `${pokemonColor}` }}>Base Stats</h2>
             <div className="d-flex flex-column gap-2">
                 {statElements}
