@@ -6,6 +6,7 @@
 
 .stat__name {
     width: 40px;
+    font-size: 12px;
 }
 
 .stat__value {

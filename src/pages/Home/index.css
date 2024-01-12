@@ -25,7 +25,7 @@
 .nav-arrow {
     color: hsl(var(--clr-white));
     cursor: pointer;
-    font-size: 21px;
+    font-size: 16px;
 }
 
 .nav-arrow:hover {

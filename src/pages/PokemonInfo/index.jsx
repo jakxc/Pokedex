@@ -82,7 +82,7 @@ const PokemonInfo = () => {
 
     
     return (
-        <div className="h-100 d-flex flex-column justify-content-between p-2" style={{ backgroundColor: pokemonColor }}>
+        <div className="h-100 d-flex flex-column justify-content-between pt-3 px-2" style={{ backgroundColor: pokemonColor }}>
             { error && <pre>An unexpected error occured!</pre>}
             { loading && <Modal content={<img src={loadingGif} alt="Pokeball" style={{ width: "350px" }} />} text="Loading...please wait" />}
             <Hero 
@@ -110,7 +110,7 @@ const PokemonInfo = () => {
                 className='pokemon-image'
                 alt={`${currentPokemon.name}`}
             />
-            <div className="info-container | w-100 d-flex flex-column pt-5 px-3 pb-4">
+            <div className="info-container | w-100 d-flex flex-column pt-3 px-3 pb-4">
                 <section className="d-flex justify-content-center align-items-center gap-2 p-4">
                     {currentPokemon.types?.map((item, i) => {
                         const [{ color }] = pokemonTypeColors.filter((el) => el.name === item.type.name);
@@ -135,10 +135,10 @@ const PokemonInfo = () => {
                     />
                 </section>
                 <section>
-                <BaseStats
-                    pokemon={currentPokemon}
-                    pokemonColor={pokemonColor}
-                />
+                    <BaseStats
+                        pokemon={currentPokemon}
+                        pokemonColor={pokemonColor}
+                    />
                 </section>
             </div>
         </div>

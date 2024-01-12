@@ -1,9 +1,9 @@
 /* Pokemon Info */
 .pokemon-image {
     position: absolute;
-    width: 300px;
+    width: 250px;
     left: calc(50% - 150px);
-    top: 20%
+    top: 8%
 }
 
 /** Pokemon Types **/
@@ -22,15 +22,17 @@
 .info-container {  
     /* Grayscale/White */
     background: hsl(var(--clr-white));
+    max-height: 100%;
   
     /* Inner Shadow/2 dp */
     box-shadow: inset 0px 1px 3px 1px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 .chevrons {
-    height: 160px;
-    max-height: 25%;
+    position: absolute;
+    top: 25%;
     z-index: 999;
 }
 
